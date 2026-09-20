@@ -1,56 +1,32 @@
-#include <stdio.h>
+// Find the power of a given number using stack
+#include<stdio.h>
+#include<conio.h>
+#define max 20
 
-#define MAX 100
-
-int stack[MAX];
-int top = -1;
-
-
-void push(int value)
-{
-    if (top == MAX - 1)
-    {
-        printf("stack overflow\n");
-        return;
-    }
-    stack[++top] = value;
-}
-
-
-int pop()
-{
-    if (top == -1)
-    {
-        printf("stack underflow\n");
-        return 1;
-    }
-    return stack[top--];
-}
+int stack[max];
+int top=-1;
 
 void main()
 {
-    int base,exponent,i;
-    int result = 1;
+    int base,power,i,ans=1;
 
     printf("Enter base:");
-    scanf("%d", &base);
+    scanf("%d",&base);
+    printf("Enter power:");
+    scanf("%d",&power);
 
-    printf("Enter exponent:");
-    scanf("%d", &exponent);
-
-
-    for (i=0;i<exponent;i++)
+    for(i=1;i<=power;i++)
     {
-        push(base);
+        top++;
+        stack[top]=base;
     }
 
-
-    while (top != -1)
+    while(top!=-1)
     {
-        result *= pop();
+        ans=ans*stack[top];
+        top--;
     }
 
-    printf("%d^%d = %d\n", base, exponent, result);
-
-    return 0;
+    printf("Answer is %d",ans);
+    getch();
 }
